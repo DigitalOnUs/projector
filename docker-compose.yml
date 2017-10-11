@@ -2,10 +2,11 @@ version: '3'
 
 services:
   tuleap:
-    image: enalean/tuleap-aio
+    build: tuleap
     ports:
       - 80:80
       - 443:443
       - 22:22
     environment:
       - VIRTUAL_HOST=localhost
+      - ROOT_PWD=admin
