@@ -1,3 +1,4 @@
-FROM enalean/tuleap-aio
+FROM enalean/tuleap-aio:9.12
 
-COPY . /root/app
+COPY boot-install.sh /root/app
+COPY setup.sh /usr/share/tuleap/tools/
