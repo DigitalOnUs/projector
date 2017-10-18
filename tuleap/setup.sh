@@ -1090,7 +1090,7 @@ if [ "$auto_passwd" = "true" ]; then
     echo "Libnss-mysql DB user (dbauthuser): $dbauth_passwd" >> $passwd_file
 
     # Ask for site admin ?
-    siteadmin_password=$(generate_passwd)
+    siteadmin_password=${SITEADMIN_PWD:-$(generate_passwd)}
     echo "Site admin password (admin): $siteadmin_password" >> $passwd_file
 
     todo "Automatically generated passwords are stored in $passwd_file"
