@@ -10,3 +10,4 @@ services:
     environment:
       - VIRTUAL_HOST=localhost
       - ROOT_PWD=admin
+      - SITEADMIN_PWD=siteadmin
