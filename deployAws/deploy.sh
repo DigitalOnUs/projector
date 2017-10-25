@@ -65,7 +65,7 @@ check_params
 echo export AWS_INSTANCE_NAME=$AWS_INSTANCE_NAME >instance-name.sh
 
 if [ -z "$SKIP_CREATE_INSTANCE" ]; then
-  echo "Creating EC2 spot instance $AWS_INSTANCE_NAME"
+  echo "Creating EC2 instance $AWS_INSTANCE_NAME"
   if ! docker-machine create \
     --driver amazonec2 \
     --amazonec2-access-key $AWS_ACCESS_KEY_ID \
@@ -75,11 +75,9 @@ if [ -z "$SKIP_CREATE_INSTANCE" ]; then
     --amazonec2-instance-type $AWS_INSTANCE_TYPE \
     --amazonec2-vpc-id $AWS_VPC_ID \
     --amazonec2-ssh-keypath ~/.ssh/id_rsa \
-    --amazonec2-request-spot-instance \
-    --amazonec2-spot-price $AWS_SPOT_PRICE \
     $AWS_INSTANCE_NAME; then
     echo
-    echo "ERROR: Could not create EC2 spot instance $AWS_INSTANCE_NAME"
+    echo "ERROR: Could not create EC2 instance $AWS_INSTANCE_NAME"
     exit 1
   fi
 fi
