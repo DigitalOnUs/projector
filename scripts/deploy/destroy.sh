@@ -1,9 +1,13 @@
-MD=`basename $0`
-required_params='AWS_INSTANCE_NAME ADOP_DIR'
+#!/bin/bash
 
-source params.sh
-source check-params.sh
-[ -e instance-name.sh ] && source instance-name.sh
+CMD=`basename $0`
+CMD_DIR=`dirname $0`
+REPO_ROOT=`dirname $0`/../../
+required_params='AWS_INSTANCE_NAME'
+
+source $CMD_DIR/params.sh
+source $CMD_DIR/check-params.sh
+[ -e $REPO_ROOT/.aws-instance-name ] && export AWS_INSTANCE_NAME=`cat $REPO_ROOT/.aws-instance-name`
 
 usage(){
   cat <<EOF
@@ -20,11 +24,3 @@ check_params
 
 echo "Removing instance $AWS_INSTANCE_NAME"
 docker-machine rm --force $AWS_INSTANCE_NAME
-
-if [ -d $ADOP_DIR ]; then
-  echo "Cleaning ADOP repo $ADOP_DIR"
-  cd $ADOP_DIR
-  git clean -d -x -f
-else
-  echo "Skipping clean of ADOP repo $ADOP_DIR, directory does not exist"
-fi
