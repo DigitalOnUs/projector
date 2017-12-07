@@ -3,11 +3,14 @@ version: '3'
 services:
   tuleap:
     build: tuleap
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST:-tuleap.localhost}
+      - ROOT_PWD=${ADMIN_PWD:-projectoradmin}
+      - SITEADMIN_PWD=${ADMIN_PWD:-projectoradmin}
+  nginx:
+    build: nginx
     ports:
       - 80:80
       - 443:443
-      - 22:22
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST:-localhost}
-      - ROOT_PWD=${ADMIN_PWD:-projectoradmin}
-      - SITEADMIN_PWD=${ADMIN_PWD:-projectoradmin}

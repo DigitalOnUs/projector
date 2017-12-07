@@ -725,6 +725,11 @@ setup_tuleap() {
 	     /etc/$PROJECT_NAME/conf/database.inc; do
 	install_dist_conf $f
     done
+
+    # Accept HTTP requests from NGINX where we would otherwise require HTTPS.
+    NGINX_IP=`resolveip nginx | sed 's/.*is //'`
+    sed -i.bak "s/trusted_proxies = ''/trusted_proxies = '$NGINX_IP'/" /etc/tuleap/conf/local.inc
+
     # replace string patterns in local.inc
     substitute "/etc/$PROJECT_NAME/conf/local.inc" '%sys_default_domain%' "$sys_default_domain" 
     substitute "/etc/$PROJECT_NAME/conf/local.inc" '%sys_org_name%' "$sys_org_name"
